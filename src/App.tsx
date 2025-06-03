@@ -1,14 +1,8 @@
-import { Routes, Route } from "react-router-dom"
-import LoginPage from "./pages/LoginPage"
-// import HomePage from "./pages/HomePage" // futura home
+// src/App.tsx
+import AppRoutes from '@/routes'; // Using @/ alias
 
 function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<LoginPage />} />
-      {/* <Route path="/home" element={<HomePage />} /> */}
-    </Routes>
-  )
+  return <AppRoutes />;
 }
 
-export default App
+export default App;

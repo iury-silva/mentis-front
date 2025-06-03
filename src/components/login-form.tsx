@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import { useAuth } from "@/auth/useAuth" // Adjusted path
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -7,8 +8,25 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"form">) {
+  const { login } = useAuth();
+
+  const handleLogin = () => {
+    // In a real app, you would get username/password from the form
+    // and send them to your backend for verification.
+    // For now, we'll simulate a successful login.
+    const mockUserData = { name: 'Test User' };
+    login(mockUserData);
+    console.log('Login successful, user:', mockUserData);
+    // Here you might navigate to another page, e.g., using react-router-dom
+    // navigate('/dashboard');
+  };
+
   return (
-    <form className={cn("flex flex-col gap-6", className)} {...props}>
+    <form
+      className={cn("flex flex-col gap-6", className)}
+      {...props}
+      onSubmit={(e) => e.preventDefault()} // Prevent default form submission for now
+    >
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold">Login to your account</h1>
         <p className="text-muted-foreground text-sm text-balance">
@@ -32,7 +50,7 @@ export function LoginForm({
           </div>
           <Input id="password" type="password" required />
         </div>
-        <Button type="submit" className="w-full">
+        <Button type="button" className="w-full" onClick={handleLogin}>
           Login
         </Button>
         <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
