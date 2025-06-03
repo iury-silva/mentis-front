@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils"
 import { useAuth } from "@/auth/useAuth" // Adjusted path
+import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -9,6 +10,7 @@ export function LoginForm({
   ...props
 }: React.ComponentProps<"form">) {
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     // In a real app, you would get username/password from the form
@@ -16,9 +18,8 @@ export function LoginForm({
     // For now, we'll simulate a successful login.
     const mockUserData = { name: 'Test User' };
     login(mockUserData);
-    console.log('Login successful, user:', mockUserData);
-    // Here you might navigate to another page, e.g., using react-router-dom
-    // navigate('/dashboard');
+    console.log('Login successful, user:', mockUserData, 'Navigating to home...');
+    navigate('/');
   };
 
   return (
